@@ -1,2 +1,2 @@
 solution:
-	gcc -fPIC solution.c -o solution -ldl
+	gcc -fPIC -Wl,-rpath=./ solution.c -o solution -ldl
