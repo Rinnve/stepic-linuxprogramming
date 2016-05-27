@@ -13,7 +13,7 @@ int count_all_children(int parent_pid)
     struct dirent *dirent;
     DIR *dir;
     dir = opendir("/proc");
-    int count = 1;    
+    int count = 0;    
     while ((dirent = readdir(dir)) != NULL)
     {
         if (dirent->d_type == DT_DIR)
@@ -32,7 +32,9 @@ int count_all_children(int parent_pid)
                     int ppid = -1;
                     sscanf(buf, "%s\t%i", tag, &ppid);
                     if (strcmp(tag, "PPid:") == 0 && ppid == parent_pid)
-                        count++;
+                    {
+                        count = count + 1 + count_all_children(pid);
+                    }
                 }
                 fclose(f);
             }                
