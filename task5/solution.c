@@ -30,7 +30,7 @@ int main()
                     char tag[255];
                     char data[255];
                     sscanf(buf, "%s\t%s", tag, data);
-                    if (strcmp(tag, "Name:") == 0 && strcmp(data, "code") == 0)
+                    if (strcmp(tag, "Name:") == 0 && strcmp(data, "genenv") == 0)
                         count++;
                 }
                 fclose(f);
