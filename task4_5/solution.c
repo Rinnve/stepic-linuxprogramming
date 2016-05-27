@@ -10,6 +10,22 @@
 
 int main()
 {
-    
-    return 0; // Never happens
+    int pid = fork();
+    if (pid)
+    {
+        // Parent
+        printf("%i\n", pid);
+        return 0;
+    } else
+    {
+        // Child
+        chdir("/");
+        //int child_pid = 
+        setsid();
+        //printf("daemon: %i\n", child_pid);
+        while (1)
+        {
+            // Do nothing 'till the end of time
+        }
+    }
 }
