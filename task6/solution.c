@@ -7,23 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int getpid()
-{
-    char buf[255];
-    FILE *f = fopen("/proc/self/status", "r");    
-    int pid;
-    while (fgets(buf, sizeof(buf), f))
-    {
-        char tag[255];
-        pid = -1;
-        sscanf(buf, "%s\t%i", tag, &pid);
-        if (strcmp(tag, "Pid:") == 0)        
-            break;
-    }
-    fclose(f);
-    return pid;
-}
-
 int getppid(int pid)
 {
     char fname[255];
@@ -43,10 +26,12 @@ int getppid(int pid)
     return ppid; 
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    if (argc != 2)
+        return -1;    
     int pid, ppid;
-    pid = getpid();
+    sscanf(argv[1], "%i", &pid);
     printf("%i\n", pid);
     ppid = getppid(pid);
     while (ppid != 1)
