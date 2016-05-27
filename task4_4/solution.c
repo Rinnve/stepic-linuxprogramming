@@ -8,15 +8,8 @@
 #include <string.h>
 #include <dirent.h>
 
-
-int main(int argc, char *argv[])
+int count_all_children(int parent_pid)
 {
-    if (argc != 2)
-        return -1;
-    
-    int target_pid = -1;
-    sscanf(argv[1], "%i", &target_pid);
-    
     struct dirent *dirent;
     DIR *dir;
     dir = opendir("/proc");
@@ -38,7 +31,7 @@ int main(int argc, char *argv[])
                     char tag[255];
                     int ppid = -1;
                     sscanf(buf, "%s\t%i", tag, &ppid);
-                    if (strcmp(tag, "PPid:") == 0 && ppid == target_pid)
+                    if (strcmp(tag, "PPid:") == 0 && ppid == parent_pid)
                         count++;
                 }
                 fclose(f);
@@ -46,6 +39,20 @@ int main(int argc, char *argv[])
         }            
     }
     closedir(dir);
+    return count;
+}
+
+
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+        return -1;
+    
+    int target_pid = -1;
+    sscanf(argv[1], "%i", &target_pid);
+    
+    int count = count_all_children(target_pid);
+    
     printf("%i\n", count);
     return 0;
     
