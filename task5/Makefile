@@ -1,2 +1,2 @@
-solution:
-	gcc -o solution solution.c
+solution: solution.c
+	gcc -Wall -o solution solution.c
