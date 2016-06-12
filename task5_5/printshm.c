@@ -13,7 +13,8 @@ int main(int argc, char** argv)
     {
         printf("Usage: printshm key");
     }
-    int id = atoi(argv[1]);
+    int key = atoi(argv[1]);
+    int id = shmget(key, 1000, 0666);
     int *arr = (int *) shmat(id, NULL, 0);
     
     for (int i = 0; i < 100; i++)
