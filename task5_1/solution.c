@@ -23,6 +23,20 @@ int main(int argc, char** argv)
     strcpy(cmd, argv[1]);
     strcat(cmd, " ");
     strcat(cmd, argv[2]);
-    printf("Command is: %s\n", cmd);
+    //printf("Command is: %s\n", cmd);
+    
+    FILE *fd = popen(cmd, "r");
+    //printf("popen result is: %i\n", fd);
+    int count = 0;
+    char c;
+    while ((c = fgetc(fd)) != EOF)
+    {
+        //printf("Read: %c (%i)\n", c, c);
+        if (c == '0') count++;
+    }
+        
+    
+    pclose(fd);
+    printf("%i\n", count);
     return 0;
 }
