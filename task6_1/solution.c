@@ -22,9 +22,10 @@ int main(int argc, char **argv)
     h = gethostbyname(argv[1]);
     
     int i = 0;
+    char buf[100];
     while (h->h_addr_list[i] != NULL)
-    {   struct in_addr *addr = (struct in_addr *) h->h_addr_list[i];
-        printf("%s\n", inet_ntoa(*addr));
+    {   
+        printf("%s\n", inet_ntop(h->h_addrtype, h->h_addr_list[i], buf, 100));
         i++;
     }
     
