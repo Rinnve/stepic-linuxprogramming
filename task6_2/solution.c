@@ -44,7 +44,7 @@ int main(int argc, char **argv)
             *newline_pos = 0;
         if (strcmp(buf, "OFF") == 0) 
             break;
-        printf("%s\n", buf);
+        printf("%s\n\n", buf);
     }
     
     return 0;
