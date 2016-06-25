@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
         return -1;    
     int pid, ppid;
     sscanf(argv[1], "%i", &pid);
-    printf("%i\n", pid);
+    //printf("%i\n", pid);
     ppid = getppid(pid);
     int len = 1;
     while (ppid != 1)
@@ -41,6 +41,6 @@ int main(int argc, char *argv[])
         len++;
         ppid = getppid(ppid);
     }
-    printf("%i\n", len);
+    printf("%i\n", len+1);
     return 0;
 }
