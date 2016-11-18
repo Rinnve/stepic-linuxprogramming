@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
     
     int count = count_all_children(target_pid);
     
+    count++;
     printf("%i\n", count);
     return 0;
     
